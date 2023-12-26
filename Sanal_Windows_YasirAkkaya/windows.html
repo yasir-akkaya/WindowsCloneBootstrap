@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome!</title>
+    <link rel="stylesheet" href="windows.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <nav
+        class="taskbar py-1 align-items-center justify-content-center fixed-bottom navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <!-- BAŞLAT BUTONU -->
+            <div class="btn-group dropup">
+                <button type="button" class="btn btn-big" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-brands fa-windows"></i>
+                </button>
+                <div class="windowsMenu dropdown-menu">
+                    <a class="dropdown-item text-dark" href="#" data-bs-toggle="modal"
+                        data-bs-target="#myComputerModal"><i class="fa-solid fa-computer" style="color: black;"></i>
+                        My Computer</a>
+                    <a class="dropdown-item text-dark" href="#" data-bs-toggle="modal" data-bs-target="#myImages"><i
+                            class="fa-solid fa-images" style="color: black;"></i>
+                        My Images
+                    </a>
+                    <a class="dropdown-item text-dark" href="#" data-bs-toggle="modal" data-bs-target="#Documents"><i
+                            class="fa-solid fa-file" style="color:black;"></i>
+                        Documents
+                    </a>
+                    <a class="dropdown-item text-dark" href="#" data-bs-toggle="modal" data-bs-target="#Apps"><i
+                            class="fa-solid fa-shapes" style="color:black;"></i>
+                        Apps
+                    </a>
+
+
+                    <!-- Kapatma butonu -->
+                    <div class="position-absolute bottom-0 start-0">
+                        <a class="dropdown-item text-dark" href="#" data-bs-toggle="modal" onclick="goToStart()"><i
+                                class="fa-solid fa-power-off fa-2xl" style="color: #000000;"></i>
+
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Arama barı -->
+            <div class="input-group">
+                <button class="btn rounded-start p-2 btn-outline-secondary" type="button"><i
+                        class="fa-solid fa-magnifying-glass"></i></button>
+                <input class="" type="text" placeholder="Search" aria-describedby="button-addon1">
+                <button class="btn rounded-end p-2 btn-outline-secondary" type="button"><i
+                        class="fa-regular fa-window-restore"></i></button>
+                <!-- Taskbar  -->
+                <button id="1" class="btn rounded mx-1 p-2 btn-outline-secondary fa-solid fa-computer d-none"
+                    style="color: black;"></button>
+                <button id="2" class=" btn rounded mx-1 p-2 btn-outline-secondary fa-solid fa-images d-none"
+                    style="color: black;"></button>
+                <button id="3" class="btn rounded mx-1 p-2 btn-outline-secondary fa-solid fa-file d-none"
+                    style="color: black;"></button>
+                <button id="4" class="btn rounded mx-1 p-2 btn-outline-secondary fa-solid fa-shapes d-none"
+                    style="color: black;"></button>
+            </div>
+            <div class="float-bottom text-center">
+                <span id="time"> </span>
+            </div>
+
+
+            <div class="float-end message ms-auto">
+                <button class="btn rounded-start p-2 btn-outline-secondary" type="button"><i
+                        class="fa-regular fa-message"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Masaüstü Uygulamaları -->
+    <div class="d-flex flex-column gap-5">
+        <div onclick=addToTaskbar(1) class="my-computer-icon mt-3" href="#" data-bs-toggle="modal"
+            data-bs-target="#myComputerModal">
+            <i class="ms-4 fa-solid fa-computer fa-2xl" style="color: #ffffff;"></i>
+            <p class="ms-0 text-white">My Computer</p>
+        </div>
+        <div onclick=addToTaskbar(2) class="my-images-item" href="#" data-bs-toggle="modal" data-bs-target="#myImages">
+            <i class="ms-4 fa-solid fa-images fa-2xl" style="color: #ffffff;"></i>
+            <p class="ms-3 text-white">Images</p>
+        </div>
+        <div onclick=addToTaskbar(3) class="my-documents-item" href="#" data-bs-toggle="modal"
+            data-bs-target="#Documents">
+            <i class="ms-4 fa-solid fa-file fa-2xl" style="color: #ffffff;"></i>
+            <p class="ms-0 text-white">Documents</p>
+        </div>
+        <div onclick=addToTaskbar(4) class="my-apps-item" href="#" data-bs-toggle="modal" data-bs-target="#Apps">
+            <i class="ms-3 fa-solid fa-shapes fa-2xl" style="color: #ffffff;"></i>
+            <p class="ms-3 text-white">Apps</p>
+        </div>
+    </div>
+
+
+
+    <!-- bilgisayarım modal -->
+    <div class="modal fade" id="myComputerModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="myComputer"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-xl">
+                <div class="modal-body">
+                    <div class="explorer-container">
+                        <div class="explorer-header">
+                            <span>My Computer</span>
+                            <button onclick=removeToTaskbar() data-bs-dismiss="modal" class="close-btn btn btn-danger"><i class="fas fa-times"
+                                    id="5" ></i></button>
+                        </div>
+                        <div class="d-flex">
+                            <div class="explorer-sidebar">
+                                <a href="#" href="#" data-bs-toggle="modal" data-bs-target="#myComputer"><i
+                                        class="fa-solid fa-computer"></i></i> My Computer</a>
+                                <a data-bs-dismiss="modal" href="#"><i class="fa-solid fa-panorama"></i> Desktop</a>
+                                <a href="#" href="#" data-bs-toggle="modal" data-bs-target="#Documents"><i
+                                        class="fa-solid fa-file"></i> Documents</a>
+                                <a href="#" href="#" data-bs-toggle="modal" data-bs-target="#myImages"><i
+                                        class="fa-solid fa-images"></i> Pictures</a>
+                                <a href="#"><i class="fa-solid fa-download"></i> Downloads</a>
+                                <a href="#"><i class="fa-brands fa-spotify"></i> Music</a>
+                            </div>
+                            <!-- Bilgisayarım iç kısmı -->
+                            <div class="explorer-content">
+                                <div class="explorer-file">
+                                    <i class="fa-solid fa-floppy-disk"></i>
+                                    <span>Local Disc (C)</span>
+                                </div>
+                                <div class="container mb-5">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 75%;"
+                                            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resimler Modal -->
+    <div class="modal fade" id="myImages" tabindex="-1" data-bs-backdrop="static" aria-labelledby="images"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="explorer-container">
+                    <div class="explorer-header">
+                        <span>My Images</span>
+                        <button onclick=removeToTaskbar() data-bs-dismiss="modal" class="close-btn btn btn-danger"><i class="fas fa-times" id="6"
+                                ></i></button>
+                    </div>
+                    <div class="d-flex">
+                        <!-- Resimlerim iç kısmı -->
+                        <div class="row">
+                            <div class="image-content col-3">
+                                <div class="image-file">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#Image"><img
+                                            src="https://source.unsplash.com/random/700x500?sig=3" alt=""></a>
+                                    <p class="ms-5 muted">Resim(1)</p>
+                                </div>
+                            </div>
+                            <div class="image-content col-3">
+                                <div class="image-file">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#Image"><img
+                                            src="https://source.unsplash.com/random/700x500?sig=3" alt=""></a>
+                                    <p class="ms-5 muted">Resim(2)</p>
+                                </div>
+                            </div>
+                            <div class="image-content col-3">
+                                <div class="image-file">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#Image"><img
+                                            src="https://source.unsplash.com/random/700x500?sig=3" alt=""></a>
+                                    <p class="ms-5 muted">Resim(3)</p>
+                                </div>
+                            </div>
+                            <div class="image-content col-3">
+                                <div class="image-file">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#Image"><img
+                                            src="https://source.unsplash.com/random/700x500?sig=3" alt=""></a>
+                                    <p class="ms-5 muted">Resim(4)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- iç modal -->
+    <div class="modal fade" id="Image" tabindex="0" aria-labelledby="Image" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-xl">
+                <div class="modal-body">
+                    <div class="explorer-container">
+                        <img src="https://source.unsplash.com/random/700x500?sig=3" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- iç modal bitiş -->
+
+    <!-- belgelerim modal -->
+    <div class="modal fade" id="Documents" tabindex="-1" data-bs-backdrop="static" aria-labelledby="Documents"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-xl">
+                <div class="modal-body">
+                    <div class="explorer-container">
+                        <div class="explorer-header">
+                            <span>Documents</span>
+                            <button onclick=removeToTaskbar() data-bs-dismiss="modal" class="close-btn btn btn-danger"><i class="fas fa-times"
+                                    id="7" ></i></button>
+                        </div>
+                        <div class="d-flex">
+                            <div class="explorer-sidebar">
+                                <a href="#" href="#" data-bs-toggle="modal" data-bs-target="#myComputer"><i
+                                        class="fa-solid fa-computer"></i></i> My Computer</a>
+                                <a data-bs-dismiss="modal" href="#"><i class="fa-solid fa-panorama"></i> Desktop</a>
+                                <a href="#" href="#" data-bs-toggle="modal" data-bs-target="#Documents"><i
+                                        class="fa-solid fa-file"></i> Documents</a>
+                                <a href="#" href="#" data-bs-toggle="modal" data-bs-target="#myImages"><i
+                                        class="fa-solid fa-images"></i> Pictures</a>
+                                <a href="#"><i class="fa-solid fa-download"></i> Downloads</a>
+                                <a href="#"><i class="fa-brands fa-spotify"></i> Music</a>
+                            </div>
+                            <!-- Belgelerim iç kısmı -->
+                            <div class="d-flex row">
+                                <!-- Belgelerim iç kısmı -->
+                                <div class="image-content col-2 mt-3">
+                                    <div class="image-file">
+                                        <a href="#wordModal" data-bs-toggle="modal" class="ms-2" data-bs-target="#"><i
+                                                class="fa-solid fa-file-word fa-2xl "></i></a>
+                                        <p class=" muted">Word</p>
+                                    </div>
+                                </div>
+                                <div class="docs-content col-2 mt-3">
+                                    <div class="docs-file">
+                                        <a href="#pdfModal" data-bs-toggle="modal" class="ms-2" data-bs-target="#"><i
+                                                class="fa-solid fa-file-pdf fa-2xl"></i></a>
+                                        <p class=" muted">Pdf</p>
+                                    </div>
+                                </div>
+                                <div class="docs-content col-2 mt-3">
+                                    <div class="docs-file">
+                                        <a href="#excelModal" data-bs-toggle="modal" class="ms-2" data-bs-target="#"><i
+                                                class="fa-solid fa-file-excel fa-2xl"></i></a>
+                                        <p class=" muted">Excel</p>
+                                    </div>
+                                </div>
+                                <div class="docs-content col-2 mt-3">
+                                    <div class="docs-file">
+                                        <a href="#powerpointModal" data-bs-toggle="modal" class="ms-2"
+                                            data-bs-target="#"><i class="fa-solid fa-file-powerpoint fa-2xl"></i></a>
+                                        <p class="muted">PowerPoint</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- Belgelerim  iç kısmı sonu-->
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Belgelerim modalları -->
+    <!-- Word -->
+    <div class="modal fade" id="wordModal" tabindex="0" aria-labelledby="wordModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-xl">
+                <div class="modal-header">
+                    <span>Word</span>
+                    <button data-bs-dismiss="modal" class="close-btn btn btn-danger"><i
+                            class="fas fa-times"></i></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center explorer-container">
+                        <textarea name="" cols="50" rows="50"></textarea>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Pdf -->
+    <div class="modal fade" id="pdfModal" tabindex="0" aria-labelledby="pdfModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-xl">
+                <div class="modal-body">
+                    <div class="text-center explorer-container">
+                        <h3>Lorem, ipsum dolor.</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit voluptatum error
+                            perferendis. Minus impedit quaerat magni deserunt praesentium cumque cupiditate velit, esse
+                            ad ut doloribus, debitis doloremque, fugiat quia soluta.
+                            Totam maxime, fugiat dolores exercitationem quidem asperiores alias, tempore dicta, facilis
+                            praesentium saepe. Quos ducimus at facere ea quia sapiente alias, a aliquam dolore iure amet
+                            ex unde sint rem?
+                            Magni soluta quos labore sapiente inventore, et impedit illo! Nam dolor sint magni rem
+                            beatae neque, iusto ipsa tenetur veniam distinctio cumque, nostrum saepe consequatur itaque.
+                            Libero minus quas ullam.
+                            Esse dolore, impedit fugit reprehenderit nulla molestiae sequi id itaque doloremque sed
+                            similique aut natus sit consequatur nisi! Officiis reprehenderit eum eaque eius earum
+                            provident? Obcaecati rerum accusamus natus quos.
+                            Commodi hic pariatur nesciunt ullam quae molestias accusantium eum illo obcaecati minima
+                            officia modi deleniti, quidem, sint, repellendus quis quia in animi nulla dolores? Magni
+                            sapiente officiis iste maiores laboriosam.
+                            Quod provident qui dolor odio in esse. Earum accusantium sit cupiditate dolorum possimus
+                            asperiores eligendi ullam fugiat esse, nobis quibusdam error sed nemo debitis libero unde
+                            sunt adipisci nam minima.
+                        </p>
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam consectetur, laudantium
+                            molestiae repudiandae veritatis distinctio perferendis eaque illo corporis minima quo. At
+                            harum in nam? Perferendis eligendi minima at a?
+                            Placeat, non obcaecati! Ullam in ipsam beatae velit, quisquam eos reiciendis voluptates
+                            architecto. Perferendis omnis, eveniet doloremque possimus non quasi odit repellendus
+                            dolorum distinctio sit quibusdam, id explicabo expedita veniam.
+                            Maiores omnis cupiditate reiciendis. Esse, reiciendis reprehenderit eum sit autem et ea
+                            maxime quaerat laborum consectetur obcaecati blanditiis ex delectus laudantium enim optio
+                            perspiciatis accusamus inventore eos natus, aspernatur expedita.
+                            Facilis quasi odit, fuga dignissimos tempora voluptatibus dolor officia reiciendis atque,
+                            nobis soluta dolore saepe nemo laboriosam laborum ipsa possimus. Velit, laborum suscipit!
+                            Odio est numquam quos ipsam cupiditate totam.
+                            Esse, consequuntur in autem provident dolor fugit labore necessitatibus cupiditate corrupti
+                            ab reprehenderit maxime tenetur optio, expedita praesentium natus qui aliquam, illo quia
+                            ullam ipsam aliquid cumque vel voluptatum. Enim.
+                            Nobis, quos beatae mollitia earum Ab aspernatur maxime ea tempore provident, consequatur
+                            itaque soluta similique commodi dolorum dolores quam totam perspiciatis, ad earum, magni
+                            delectus. Qui id, blanditiis quas consequatur totam molestias voluptatem a provident?
+                            Ex blanditiis doloribus placeat voluptatem repellat, reprehenderit odit architecto facere
+                            dolore in repellendus quos dolor quibusdam ipsum fuga, molestiae ullam quas voluptatum autem
+                            iusto, atque nam obcaecati. Voluptas, nobis numquam!
+                            Perspiciatis autem modi obcaecati! Delectus, ipsum eligendi. Accusantium, provident.
+                            Repellat quasi aliquam nobis expedita accusamus deserunt voluptatum, odio dolor laboriosam
+                            magni reiciendis quisquam? Veritatis fuga cum quis nulla quisquam ad?
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Excel -->
+    <div class="modal fade" id="excelModal" tabindex="0" aria-labelledby="excelModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-xl">
+                <div class="modal-body">
+                    <div style="height: 180px;" class="row  text-center explorer-container">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                        <input class="col-1" style="height: 30px;" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Powerpoint -->
+    <div class="modal fade" id="powerpointModal" tabindex="0" aria-labelledby="powerpointModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-xl">
+                <div class="modal-body">
+                    <div class=" text-center explorer-container">
+                        <div id="carouselExampleDark" class="carousel carousel-dark slide">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0"
+                                    class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
+                                    aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
+                                    aria-label="Slide 3"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active" data-bs-interval="10000">
+                                    <img src="assets/images/slider1.jpg" class="d-block w-100" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5 class="text-light bg-dark">Header</h5>
+                                        <p class="text-light bg-dark">Lorem ipsum dolor sit amet, consectetur
+                                            adipisicing elit. Repellendus, consequuntur! Eveniet dolorum ducimus eos
+                                            voluptas. Error adipisci vero placeat saepe sed animi cumque ea asperiores?
+                                            Ipsum repellat voluptatibus accusamus provident?</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item" data-bs-interval="2000">
+                                    <img src="assets/images/slider2.jpeg" class="d-block w-100" alt="">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5 class="text-light bg-dark">Header</h5>
+                                        <p class="text-light bg-dark">Lorem ipsum dolor sit, amet consectetur
+                                            adipisicing elit. Sequi ad, consectetur, velit ducimus asperiores obcaecati
+                                            exercitationem dolores laboriosam, vero eaque officia perspiciatis
+                                            cupiditate sit harum quod cum vel nisi commodi!</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="assets/images/slider3.jpg" class="d-block w-100" alt="">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5 class="text-light bg-dark">Header</h5>
+                                        <p class="text-light bg-dark">Lorem ipsum dolor sit amet consectetur adipisicing
+                                            elit. Adipisci culpa corporis nam ab expedita dolorem suscipit sequi quia.
+                                            Vel architecto earum nihil placeat corrupti inventore quas atque fuga
+                                            similique repellat?</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Belgelerim Modalları sonu -->
+
+
+    <!-- Uygulamalar Modal -->
+    <div class="modal fade" id="Apps" tabindex="-1" data-bs-backdrop="static" aria-labelledby="Apps" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-xl">
+                <div class="modal-body">
+                    <div class="explorer-container">
+                        <div class="explorer-header">
+                            <span>Apps</span>
+                            <button onclick=removeToTaskbar() data-bs-dismiss="modal" class="close-btn btn btn-danger"><i class="fas fa-times"
+                                    id="8" ></i></button>
+                        </div>
+                        <div class="d-flex">
+                            <div class="explorer-sidebar">
+                                <a href="#" href="#" data-bs-toggle="modal" data-bs-target="#myComputer"><i
+                                        class="fa-solid fa-computer"></i></i> My Computer</a>
+                                <a data-bs-dismiss="modal" href="#"><i class="fa-solid fa-panorama"></i> Desktop</a>
+                                <a href="#" href="#" data-bs-toggle="modal" data-bs-target="#Documents"><i
+                                        class="fa-solid fa-file"></i> Documents</a>
+                                <a href="#" href="#" data-bs-toggle="modal" data-bs-target="#myImages"><i
+                                        class="fa-solid fa-images"></i> Pictures</a>
+                                <a href="#"><i class="fa-solid fa-download"></i> Downloads</a>
+                                <a href="#"><i class="fa-brands fa-spotify"></i> Music</a>
+                            </div>
+                            <!-- uygulamalar iç kısmı -->
+
+                            <div class="d-flex row text-center">
+                                <!-- Uygulamalariç kısmı -->
+                                <div class="apps-content col-4 mt-3 ms-3">
+                                    <div class="apps-file">
+                                        <a href="#calculatorModal" data-bs-toggle="modal"
+                                            data-bs-target="#calculatorModal"><i
+                                                class=" fa-solid fa-calculator fa-2xl"></i></a>
+                                        <p class="ms-0 muted">Calculator</p>
+                                    </div>
+                                </div>
+                                <div class="apps-content col-4 mt-3">
+                                    <div class="apps-file">
+                                        <a href="#xoxModal" data-bs-toggle="modal" data-bs-target="#xoxModal"><i
+                                                class="fa-brands fa-xbox fa-2xl"></i></a>
+                                        <p class=" muted">TicTacToe</p>
+                                    </div>
+                                </div>
+                                <div class="apps-content col-3 mt-3">
+                                    <div class="apps-file">
+                                        <a href="#paintModal" data-bs-toggle="modal" data-bs-target="#"><i
+                                                class="fa-solid fa-paintbrush fa-2xl"></i></a>
+                                        <p class=" muted">Paint</p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <!-- Uygulamalar  iç kısmı sonu-->
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Uygulamalar Modal'ları -->
+    <!-- Calculator -->
+    <div class="modal fade " id="calculatorModal" tabindex="0" aria-labelledby="calculatorModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-xl">
+                <div class="modal-body ">
+                    <div class=" explorer-container">
+                        <div class="calculator card">
+
+                            <input type="text" class="calculator-screen z-depth-1" value="" disabled />
+
+                            <div class="calculator-keys">
+
+                                <button type="button" class="calcbtn operator btn btn-info" value="+">+</button>
+                                <button type="button" class="calcbtn operator btn btn-info" value="-">-</button>
+                                <button type="button" class="calcbtn operator btn btn-info" value="*">&times;</button>
+                                <button type="button" class="calcbtn operator btn btn-info" value="/">&divide;</button>
+
+                                <button type="button" value="7" class="calcbtn btn btn-light waves-effect">7</button>
+                                <button type="button" value="8" class="calcbtn btn btn-light waves-effect">8</button>
+                                <button type="button" value="9" class="calcbtn btn btn-light waves-effect">9</button>
+
+
+                                <button type="button" value="4" class="calcbtn btn btn-light waves-effect">4</button>
+                                <button type="button" value="5" class="calcbtn btn btn-light waves-effect">5</button>
+                                <button type="button" value="6" class="calcbtn btn btn-light waves-effect">6</button>
+
+
+                                <button type="button" value="1" class="calcbtn btn btn-light waves-effect">1</button>
+                                <button type="button" value="2" class="calcbtn btn btn-light waves-effect">2</button>
+                                <button type="button" value="3" class="calcbtn btn btn-light waves-effect">3</button>
+
+
+                                <button type="button" value="0" class="calcbtn btn btn-light waves-effect">0</button>
+                                <button type="button" class="calcbtn decimal function btn btn-secondary"
+                                    value=".">.</button>
+                                <button type="button" class="calcbtn all-clear function btn btn-danger btn-sm"
+                                    value="all-clear">AC</button>
+
+                                <button type="button" class="calcbtn equal-sign operator btn btn-default"
+                                    value="=">=</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- xox -->
+    <div class="modal fade" id="xoxModal" tabindex="0" aria-labelledby="xoxModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-xl">
+
+                <div id="title">
+                    <h1>Tic Tac Toe</h1>
+                </div>
+                <div id="board">
+                    <div class="square" id="square0"></div>
+                    <div class="square" id="square1"></div>
+                    <div class="square" id="square2"></div>
+                    <div class="square" id="square3"></div>
+                    <div class="square" id="square4"></div>
+                    <div class="square" id="square5"></div>
+                    <div class="square" id="square6"></div>
+                    <div class="square" id="square7"></div>
+                    <div class="square" id="square8"></div>
+                </div>
+                <div id="endGame">
+                    <input type="button" value="Restart" id="restartButton" onclick="restartButton()" />
+                </div>
+                <script src="game.js"></script>
+            </div>
+        </div>
+    </div>
+    <!-- paint -->
+    <div style="margin-left: 100px;" class="modal fade" id="paintModal" tabindex="0" aria-labelledby="paintModal"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered mx-0" style="width: fit-content;">
+            <div style="width: 800px;" class="modal-content modal-2xl">
+                <main>
+                    <div class="left-block">
+                        <div class="colors">
+                            <button type="button" value="#0000ff"></button>
+                            <button type="button" value="#009fff"></button>
+                            <button type="button" value="#0fffff"></button>
+                            <button type="button" value="#bfffff"></button>
+                            <button type="button" value="#000000"></button>
+                            <button type="button" value="#333333"></button>
+                            <button type="button" value="#666666"></button>
+                            <button type="button" value="#999999"></button>
+                            <button type="button" value="#ffcc66"></button>
+                            <button type="button" value="#ffcc00"></button>
+                            <button type="button" value="#ffff00"></button>
+                            <button type="button" value="#ffff99"></button>
+                            <button type="button" value="#003300"></button>
+                            <button type="button" value="#555000"></button>
+                            <button type="button" value="#00ff00"></button>
+                            <button type="button" value="#99ff99"></button>
+                            <button type="button" value="#f00000"></button>
+                            <button type="button" value="#ff6600"></button>
+                            <button type="button" value="#ff9933"></button>
+                            <button type="button" value="#f5deb3"></button>
+                            <button type="button" value="#330000"></button>
+                            <button type="button" value="#663300"></button>
+                            <button type="button" value="#cc6600"></button>
+                            <button type="button" value="#deb887"></button>
+                            <button type="button" value="#aa0fff"></button>
+                            <button type="button" value="#cc66cc"></button>
+                            <button type="button" value="#ff66ff"></button>
+                            <button type="button" value="#ff99ff"></button>
+                            <button type="button" value="#e8c4e8"></button>
+                            <button type="button" value="#ffffff"></button>
+                        </div>
+                        <div class="brushes">
+                            <button type="button" value="1"></button>
+                            <button type="button" value="2"></button>
+                            <button type="button" value="3"></button>
+                            <button type="button" value="4"></button>
+                            <button type="button" value="5"></button>
+                        </div>
+                        <div class="buttons">
+                            <button id="clear" type="button">Clear</button>
+                            <button id="save" type="button">Save</button>
+                        </div>
+                    </div>
+                    <div class="right-block">
+                        <canvas id="paint-canvas" width="800px" height="800px"></canvas>
+                    </div>
+                </main>
+
+            </div>
+        </div>
+    </div>
+    <!-- Uygulamalar Modal'ları Sonu -->
+    <!-- Uygulamalar Modal Sonu -->
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- scriptler -->
+
+    <!-- taskbar app func -->
+    <script>
+        const computerTask = document.getElementById("1");
+        const imagesTask = document.getElementById("2");
+        const documentsTask = document.getElementById("3");
+        const appsTask = document.getElementById("4");
+
+        function addToTaskbar(id) {
+
+
+            switch (id) {
+                case 1:
+                    computerTask.classList.remove("d-none");
+                    computerTask.classList.add("d-inline-block");
+                    break;
+                case 2:
+                    imagesTask.classList.remove("d-none");
+                    imagesTask.classList.add("d-inline-block");
+                    break;
+                case 3:
+                    documentsTask.classList.remove("d-none");
+                    documentsTask.classList.add("d-inline-block");
+                    break;
+                case 4:
+                    appsTask.classList.remove("d-none");
+                    appsTask.classList.add("d-inline-block");
+                    break;
+
+            }
+
+
+
+        }
+
+        function removeToTaskbar() {
+            const taskArray = [computerTask, imagesTask, documentsTask, appsTask];
+            taskArray.forEach(element => {
+                element.classList.remove("d-inline-block");
+                element.classList.add("d-none");
+            });
+        }
+
+
+    </script>
+
+
+
+
+    <!-- kapatma fonk -->
+    <script>
+        function goToStart() {
+            document.body.classList.add("fade-out");
+
+
+            setTimeout(function () {
+                window.location.href = "start.html";
+            }, 2000);
+        }
+    </script>
+
+
+
+    <!-- hesap makinesi script -->
+    <script>
+        const calculator = {
+            displayValue: '0',
+            firstOperand: null,
+            waitingForSecondOperand: false,
+            operator: null,
+        };
+
+        function inputDigit(digit) {
+            const { displayValue, waitingForSecondOperand } = calculator;
+
+            if (waitingForSecondOperand === true) {
+                calculator.displayValue = digit;
+                calculator.waitingForSecondOperand = false;
+            } else {
+                calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
+            }
+        }
+
+        function inputDecimal(dot) {
+            // If the `displayValue` does not contain a decimal point
+            if (!calculator.displayValue.includes(dot)) {
+                // Append the decimal point
+                calculator.displayValue += dot;
+            }
+        }
+
+        function handleOperator(nextOperator) {
+            const { firstOperand, displayValue, operator } = calculator
+            const inputValue = parseFloat(displayValue);
+
+            if (operator && calculator.waitingForSecondOperand) {
+                calculator.operator = nextOperator;
+                return;
+            }
+
+            if (firstOperand == null) {
+                calculator.firstOperand = inputValue;
+            } else if (operator) {
+                const currentValue = firstOperand || 0;
+                const result = performCalculation[operator](currentValue, inputValue);
+
+                calculator.displayValue = String(result);
+                calculator.firstOperand = result;
+            }
+
+            calculator.waitingForSecondOperand = true;
+            calculator.operator = nextOperator;
+        }
+
+        const performCalculation = {
+            '/': (firstOperand, secondOperand) => firstOperand / secondOperand,
+
+            '*': (firstOperand, secondOperand) => firstOperand * secondOperand,
+
+            '+': (firstOperand, secondOperand) => firstOperand + secondOperand,
+
+            '-': (firstOperand, secondOperand) => firstOperand - secondOperand,
+
+            '=': (firstOperand, secondOperand) => secondOperand
+        };
+
+        function resetCalculator() {
+            calculator.displayValue = '0';
+            calculator.firstOperand = null;
+            calculator.waitingForSecondOperand = false;
+            calculator.operator = null;
+        }
+
+        function updateDisplay() {
+            const display = document.querySelector('.calculator-screen');
+            display.value = calculator.displayValue;
+        }
+
+        updateDisplay();
+
+        const keys = document.querySelector('.calculator-keys');
+        keys.addEventListener('click', (event) => {
+            const { target } = event;
+            if (!target.matches('button')) {
+                return;
+            }
+
+            if (target.classList.contains('operator')) {
+                handleOperator(target.value);
+                updateDisplay();
+                return;
+            }
+
+            if (target.classList.contains('decimal')) {
+                inputDecimal(target.value);
+                updateDisplay();
+                return;
+            }
+
+            if (target.classList.contains('all-clear')) {
+                resetCalculator();
+                updateDisplay();
+                return;
+            }
+
+            inputDigit(target.value);
+            updateDisplay();
+        });
+    </script>
+    <!-- paint -->
+    <script>
+        window.onload = function () {
+
+            // Definitions
+            var canvas = document.getElementById("paint-canvas");
+            var context = canvas.getContext("2d");
+            var boundings = canvas.getBoundingClientRect();
+
+            // Specifications
+            var mouseX = 0;
+            var mouseY = 0;
+            context.strokeStyle = 'black'; // initial brush color
+            context.lineWidth = 1; // initial brush width
+            var isDrawing = false;
+
+
+            // Handle Colors
+            var colors = document.getElementsByClassName('colors')[0];
+
+            colors.addEventListener('click', function (event) {
+                context.strokeStyle = event.target.value || 'black';
+            });
+
+            // Handle Brushes
+            var brushes = document.getElementsByClassName('brushes')[0];
+
+            brushes.addEventListener('click', function (event) {
+                context.lineWidth = event.target.value || 1;
+            });
+
+            // Mouse Down Event
+            canvas.addEventListener('mousedown', function (event) {
+                setMouseCoordinates(event);
+                isDrawing = true;
+
+                // Start Drawing
+                context.beginPath();
+                context.moveTo(mouseX, mouseY);
+            });
+
+            // Mouse Move Event
+            canvas.addEventListener('mousemove', function (event) {
+                setMouseCoordinates(event);
+
+                if (isDrawing) {
+                    context.lineTo(mouseX, mouseY);
+                    context.stroke();
+                }
+            });
+
+            // Mouse Up Event
+            canvas.addEventListener('mouseup', function (event) {
+                setMouseCoordinates(event);
+                isDrawing = false;
+            });
+
+            // Handle Mouse Coordinates
+            function setMouseCoordinates(event) {
+                mouseX = event.clientX - boundings.left;
+                mouseY = event.clientY - boundings.top;
+            }
+
+            // Handle Clear Button
+            var clearButton = document.getElementById('clear');
+
+            clearButton.addEventListener('click', function () {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+            });
+
+            // Handle Save Button
+            var saveButton = document.getElementById('save');
+
+            saveButton.addEventListener('click', function () {
+                var imageName = prompt('Please enter image name');
+                var canvasDataURL = canvas.toDataURL();
+                var a = document.createElement('a');
+                a.href = canvasDataURL;
+                a.download = imageName || 'drawing';
+                a.click();
+            });
+        };
+
+    </script>
+
+
+    <!-- saat fonksiyonu -->
+    <script>
+        function refreshTime() {
+            const timeDisplay = document.getElementById("time");
+            const dateString = new Date().toLocaleString();
+            const formattedString = dateString.replace(", ", " - ");
+            timeDisplay.textContent = formattedString;
+        }
+        setInterval(refreshTime, 1000);
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-eBqN7MEHqOVnKMyKD2cFdA1tW7M/7a6ZsLD7Lug8OTlQ5P/Tf4TGge5eOIQ5Dkfe"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

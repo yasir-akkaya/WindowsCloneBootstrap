@@ -1,0 +1,12 @@
+body{
+    background-color: black !important;
+}
+.onOff{
+    height: 350px;
+    width: 350px;
+    
+
+}
+.onOffimage{
+    width: 100%;
+}
